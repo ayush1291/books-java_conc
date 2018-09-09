@@ -1,0 +1,14 @@
+1. Convert the number into binary representation
+2. Only copy the rightmost 8 bits (LSB) and discard the rest.
+3. From the result of step#2, if the leftmost bit is 0, then use a calculator to convert the number to decimal. 
+This is your answer.
+4. Else (if the leftmost bit is 1) your answer is negative. Leave all rightmost zeros and the first non-zero bit unchanged. 
+And reversed the rest, that is, replace 1's by 0's and 0's by 1's. Then use a calculator to convert to decimal and append 
+a negative sign to indicate the value is negative.
+
+eg. 132 (base 10)
+10000100 (base 2)
+ int (00000000_00000000_00000000_10000100)  >> byte (10000100) :Java chops-off the left-most 24 bits
+ If the left-most bit is 1 (as we have here), it means that the number is negative and more work needs to be done
+01111100 >>>>>> 124
+ad -ve sign : -124

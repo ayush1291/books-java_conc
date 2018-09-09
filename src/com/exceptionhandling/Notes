@@ -1,0 +1,32 @@
+1. Throwable (superclass of all errors and exceptions)
+public class Throwable
+extends Object
+implements Serializable
+
+throw : only Throwable (or subclass) objects
+catch : only Throwable (or subclass) objects
+****Throwable and any subclass of Throwable that is not also a subclass of either RuntimeException or 
+Error are regarded as checked exceptions.
+
+2. Hierarchy
+Throwable
+	- Error (
+	- Exception
+		- RuntimeException
+		-
+
+3. Unchecked exceptions
+they represent exceptions that a program shouldn't generally expect to occur, but could potentially recover from. They represent what are likely to be programming errors rather than errors due to invalid user input or a badly configured environment.
+
+unchecked exceptions can be thrown "at any time";
+methods don't explicitly have to declare that they can throw an unchecked exception;
+callers don't have to handle them explicitly.
+
+4. Checked exception
+they generally represent errors that a program will expect to occur in the normal course of duty
+
+5. Error
+Error subclasses represent "serious" errors that a program generally shouldn't expect to catch and recover from. These include conditions such as an expected class file being missing, or an OutOfMemoryError.
+		
+		
+

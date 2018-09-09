@@ -1,0 +1,29 @@
+1. Stateless classes are always thread safe
+**** a program computing factors of a num
+2. As u add any state, u need to worry about its thread safety
+**** say, u add hitCounter to program above and update it using ctr++ (without syncronization)
+This is susceptible to lost updates coz ctr++ is NOT atomic
+
+2. Atomicity
+Operations like i++ are compound,  i.e. read > add > write (
+
+3. Race conditions
+Race condition happens when ur prog depends on timing of operations (lucky timing), when this is missed, unexpected behavior is seen
+types : check then act, read modify write 
+egs : lazy initialization (like in singleton one) : there is a chance that thread 1 is initializing, but thread 2 enters at same time and
+finds obj as null...so will initialize again
+public MyObject initialize() {
+
+    MyObject obj = null;
+	if(instance == null) {
+		obj = new MyObject();
+	 }
+	 return obj;
+ 
+ }
+ 
+ 4. avoid race conditions: prevent other thread from using / accessing, when in mid of modification
+ Problem : lazy initialization
+ Soln : Intrinsic Locking (syncronized method)
+ 
+ Problem : sl
