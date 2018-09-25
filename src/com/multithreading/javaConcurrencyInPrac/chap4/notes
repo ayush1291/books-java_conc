@@ -1,0 +1,38 @@
+1. Designing a thread safe class means
+- identify the objects that make the thread state
+- identify the invariants that constrain the variables
+- establish policy
+
+2. Policy tells how are we maintaining thread safety, so must be properly documented
+
+3. if some states are invalid, those must be encapsulated
+if some transitions are invalid, the actions ,must be atomic
+
+4. For ensuring thread safety, one has to understand the object's invariants and postconditions. Constraints on valid values or state
+transitions may result into atomicity or encapsulation requirement
+
+5. if u need to meet a precondition, use synchronizers (blocking queue, semaphore etc)
+
+6. Instance confinement : Encapsulating data in an object confines its access to object's method...which can be guarded by lock
+
+7. Decorator pattern (in all synchronized* collections....it wraps in synchronized method, but calls underlying collection's method)
+
+8. Java Monitor pattern (Vector, Hashtable)
+here, we have a private lock, instead of using intrinsic lock. 
+Advantages : easy to debug when liveness problems occurs as intrinsic lock can be held by anyone
+Also, since lock is private. client code will NOT acquire this (client can acquire intrinsic lock incorrectly and keep it awai)
+
+9. Delegating thread safety......use such collections or such things that they will take care of thread safety
+eg. we add AtomicLong to chap2 eg.....so the component we added was thread safe, and thats how we delegated the responsibility
+
+10. If there are multiple independent state variables, we can delegate responsibility of thread safety (step5)
+11. If state variable is thread safe and does not participate in invariant OR do not have any state transition constraint,
+it can be published safely
+
+12. Adding state to existing thread safe class
+- understand its synchronization policy
+- add new atomic operation
+- extend the class, if possible (but NOW, policy is distributed over many classes)
+- client side locking (instead of extending teh functionality by extending the class, put its code in a helper class)
+- but for above..make sure u use the right LOCK (step7)
+- composition (step8)

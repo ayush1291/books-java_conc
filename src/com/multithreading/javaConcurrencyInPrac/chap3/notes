@@ -1,0 +1,51 @@
+1. Synchronization : NOT just atomicity, but also about VISIBILITY (i.e. changes that ine thread makes, should be visible to others)
+2. If NO synchronization, the operations / statements can be reordered
+3. Always use proper sync, when data is shared across threads
+
+4. Stale data is a big problem (as thread may see some values updated and some stale) ?? so step 2
+5. Since long, double are 64 bit operations, they are NOT atomic. Always guard them with lock OR make volatile
+6.Locking is NOT just mutual exclusion about, its also about memory visibility. 
+So, synchronize on same lock so that all thread see correct state of shred mutable variables 
+7. Locking guarantees visibility and atomicity
+8. Volatile variables guarantees ONLY visibility
+
+9. publishing >> making it available to outside world
+10. publishing b4 construction or exposing internal state, makes it difficult to  maintain thread safety. 
+If safety is compromised, the object is said to have escaped
+
+11. Simplest way of achieving thread safety : don't share state (Thread confinement)
+12. Eg. Swing :P
+JDBC connection pool : when someone requests.....a connection is given from the pool...the thread then executes all requests synchronously....
+till this thread doesn't return the connection object, it is not given to any other requesting thread
+13. Using non thread safe in a thread safe environment is still thread safe.....but user should be aware of this fact..and correspondong
+perform actions
+14. Immutable objects : Always thread safe, coz
+- State cannot be changed post construction
+- are always properly constructed (doesn't escape during construction)
+- all fields are final
+15. Program state stored in a immutable object can be altered by replacing the immutable object with new instance
+16. Final objects ensure initialization safety...so they can be shared without synchronization
+
+17. safe publication:
+If we publish an object to a thread, there is NO guarantee of its right state also getting visible....to do so, we need synchronization
+For immutable, initialization safety is guaranteed iff : unmodifiable state, final fields, proper construction 
+
+18. safe publishing ==> state and reference, both are made visible at the same time
+Properly constructed object can be safely published by
+- initializing ref from static initializer
+- storing ref into volatile field or AtomicReference
+- storing ref into final field
+- storing ref into field guarded by lock
+
+19. Vector, ConcurrentHashMap, BLockingQueue, HAshTable, ArraySet, synchronized*, >> use policy #3 (mentioned at the end)
+
+20. Immutable objects can be published through any mechanism
+Effectively Immutable objects must be safely published
+Mutable objects must be safely published and must be guarded by lock or synchronized
+
+Policies for object sharing
+1. thread confinement
+2. shared read only (Immutable, Effectively Immutable)
+3. shared thread safe (eg. thread safe collections)
+4. guarded
+

@@ -1,0 +1,53 @@
+1. Stateless classes are always thread safe
+**** a program computing factors of a num
+2. As u add any state, u need to worry about its thread safety
+**** say, u add hitCounter to program above and update it using ctr++ (without syncronization)
+This is susceptible to lost updates coz ctr++ is NOT atomic
+
+2. Compound actions
+check then act (eg. lazy initialization)
+read modify write (eg. i++)
+
+3. Atomicity
+Operations like i++ are compound,  i.e. read > add > write (so, if these are present in your code...its NOT thread safe)
+it is susceptible to loss updates
+
+4. Race conditions
+Race condition happens when ur prog depends on timing of operations (lucky timing), when this is missed, unexpected behavior is seen
+types : check then act, read modify write 
+egs : lazy initialization (like in singleton one) : there is a chance that thread 1 is initializing, but thread 2 enters at same time and
+finds obj as null...so will initialize again
+public MyObject initialize() {
+
+    MyObject obj = null;
+	if(instance == null) {
+		obj = new MyObject();
+	 }
+	 return obj;
+ 
+ }
+ 
+ 5. avoid race conditions: prevent other thread from using / accessing, when in mid of modification
+ Problem : lazy initialization
+ Soln : Intrinsic Locking (syncronized method)
+ 
+ Problem : compound actions
+ Soln : Atomic variables
+ 
+ 6. Private / local primitives are always Thread safe
+ 
+ 7. if single state, and that state is threadsafe...we r good  (step2 > SafeCountingFactorizer)
+ But if multiple states, we have to ensure that, if they are dependent, then these actions must be atomic together
+ 
+ To preserve consistency, update related state variables in a single atomic operation 
+ 
+ 8. Intrinsic lock >> Every thread acquires a lock first while entering and then releases it while exiting.
+ They act as Mutual Exclusion locks
+ 
+ 9. reentrant lock : held per thread basis. Each lock is associated with an acquisition count.
+ It saves from deadlock
+ 
+ 10. Holding lock for entire duration of a compound action, can make this compound action ATOMIC
+ 
+ 11. Holding lock for long duration can be problematic in terms of responsiveness and performance
+ 
