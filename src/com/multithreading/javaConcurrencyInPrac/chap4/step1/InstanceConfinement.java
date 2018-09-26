@@ -3,6 +3,8 @@ package com.multithreading.javaConcurrencyInPrac.chap4.step1;
 import java.util.HashSet;
 import java.util.Set;
 
+
+//encapsulated,
 public class InstanceConfinement {
 
 	private final Set<MyObject> set = new HashSet<>();

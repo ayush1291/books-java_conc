@@ -5,7 +5,7 @@
 This is susceptible to lost updates coz ctr++ is NOT atomic
 
 2. Compound actions
-check then act (eg. lazy initialization)
+check then act (eg. lazy initialization)- singleton eg
 read modify write (eg. i++)
 
 3. Atomicity
@@ -45,7 +45,7 @@ public MyObject initialize() {
  They act as Mutual Exclusion locks
  
  9. reentrant lock : held per thread basis. Each lock is associated with an acquisition count.
- It saves from deadlock
+ It saves from deadlock -- check ref later on
  
  10. Holding lock for entire duration of a compound action, can make this compound action ATOMIC
  

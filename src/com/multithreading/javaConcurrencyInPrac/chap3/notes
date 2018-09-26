@@ -17,8 +17,10 @@ If safety is compromised, the object is said to have escaped
 12. Eg. Swing :P
 JDBC connection pool : when someone requests.....a connection is given from the pool...the thread then executes all requests synchronously....
 till this thread doesn't return the connection object, it is not given to any other requesting thread
+
 13. Using non thread safe in a thread safe environment is still thread safe.....but user should be aware of this fact..and correspondong
-perform actions
+perform actions...
+
 14. Immutable objects : Always thread safe, coz
 - State cannot be changed post construction
 - are always properly constructed (doesn't escape during construction)
@@ -27,7 +29,9 @@ perform actions
 16. Final objects ensure initialization safety...so they can be shared without synchronization
 
 17. safe publication:
-If we publish an object to a thread, there is NO guarantee of its right state also getting visible....to do so, we need synchronization
+If we publish an object to a thread, there is NO guarantee of its right state also getting visible....to do so, we need 
+synchronization
+**
 For immutable, initialization safety is guaranteed iff : unmodifiable state, final fields, proper construction 
 
 18. safe publishing ==> state and reference, both are made visible at the same time
@@ -48,4 +52,8 @@ Policies for object sharing
 2. shared read only (Immutable, Effectively Immutable)
 3. shared thread safe (eg. thread safe collections)
 4. guarded
+
+
+//TODO
+Step6
 

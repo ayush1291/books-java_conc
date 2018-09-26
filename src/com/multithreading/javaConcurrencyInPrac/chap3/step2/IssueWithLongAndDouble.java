@@ -20,7 +20,7 @@ public class IssueWithLongAndDouble {
 	//writing a volatile is similar to exiting a synchronized block
 	
 	//avoid much dependence on volatile.....egs indicating imp life cycle event occurred (initialization / shutdown),
-	// status/interruption flag
+	// status/interruption flag-- check this point
 	
 	//use when
 	//1. locking is not required while accessing
