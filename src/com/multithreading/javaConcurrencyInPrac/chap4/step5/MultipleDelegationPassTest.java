@@ -10,7 +10,7 @@ public class MultipleDelegationPassTest {
 	
 	public static void main(String[] args) throws InterruptedException {
 		
-		MultipleDelegationFails multipleDelegationFails = new MultipleDelegationFails();
+		MultipleDelegationPass multipleDelegationFails = new MultipleDelegationPass();
 		Thread thread1 = new Thread() {
 			@Override
 			public void run() {

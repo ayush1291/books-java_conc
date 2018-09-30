@@ -8,7 +8,6 @@ public class ClientSideLockRight {
 
 	public List<String> list = Collections.synchronizedList(new ArrayList<>());
 	
-	//incorrect lock, the state of list should be guarded by its own lock
 	public boolean putIfAbsent(String a){
 		synchronized (list){
 			boolean absent = !list.contains(a);

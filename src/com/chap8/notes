@@ -1,0 +1,39 @@
+1. Executor was used >> to separate execution and submission, but at times, this may not be the case
+eg. when you used single thread executor and coded as per single thread (thread confinement), but now u change executor, 
+you will face problem;
+when muiltple threds are running and their results are interdependent (may cause deadlock >> finally starvation);
+mixing short and long running tasks etc
+
+2. thread starvation dealock
+eg. -  thread 1 : web renderer which uses thread 2(text renderer) and thread 3 (image renderer)
+thread 1 will be blocked till 2 and 3 completes
+- say your JDBC connection pool has 10 connections, and your thread pool has 15 threads, 
+now extra 5 threads will be blocked till conenction is made available
+
+3. Long running tasks may block small running tasks. To mitigate thiswe can use timed verions of different options
+(Thread.join, BlockingQueue.put etc). If it times out, you can either requeue or cancel the task
+
+4. Thread pool size should depend upon your computer's performance, requirements
+
+5. ThredPoolExecutor : base implementation for execuotrs like fixedThreadPool, cachedThreadPool etc
+
+6. If tasks are to be queued, three strategies are used
+- fixed/ single use unbounded LinkedBlockingQueue by default.
+- better way is to use bounded Linked/Array/priority blockingqueue
+- cached / for very large unbound, we can use synchronous queue (i.e. immediate handoff) : new thread is created if size(core) < size(max), else reject
+
+7. saturation policy : what to do when bounded queu fills up (choosen when creating executor)
+- abort : throw RejectedExecutionException
+- discard
+- discard-oldest : discards the task taht what othewise be executed next, and submits new task
+- caller-runs : submits it back to the caller for execution
+
+8. Thread factory : creates non daemon threads with no spl config
+- single method : newThread
+- e when, providing thread name, specifying UncaughtExceptionHandler
+
+9. Options passed to ThreadPoolExecutor can be changed via setters as well....except for singleThread
+It is wrppaed in unconfigurableExecutorService
+
+10. ThreadPoolExecutor can be extended to override some methods
+

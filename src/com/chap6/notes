@@ -1,0 +1,13 @@
+1. task : discrete unit of work
+2. task boundaries
+3. Execution policy : what, when, where, how (of execution is specified)
+
+4. shutdown / shutdownnow
+5.callable, future, futuretask
+callable better than runnable as we can throw exception
+
+6. Tasks with an executor 
+if not started :can be cancelled
+if started : it depends how is reponsiveness to interruption handled
+
+7. Future : get : blocks if not completed, but returns immediately, if complete or exception occurs )ExecutionException / Cancellation Exception)

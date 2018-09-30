@@ -1,5 +1,7 @@
 package com.multithreading.javaConcurrencyInPrac.chap4.step5;
 
+
+//you can uncomment and see that, if there is a chance of invalid state, an exception will be thrown
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -16,22 +18,24 @@ public class MultipleDelegationPass {
 	//individually, these are atomic, but as a whole, there is a chance of failure
 	//so only delegation will fail.....use extra locking
 	
-	public void setUpper (int i) throws Exception{
+	public synchronized void setUpper (int i) throws Exception{
 		if (i > lower.get()) {
 			upper.set(i);
-		}else {
-			throw new Exception();
 		}
+//			else {
+//			throw new Exception();
+//		}
 		
 	}
 	
-	public void setLower (int i) throws Exception{
+	public synchronized void setLower (int i) throws Exception{
 		if (i < upper.get()) {
 			Thread.sleep(4000);
 			lower.set(i);
-		}else {
-			throw new Exception();
 		}
+//			else {
+//			throw new Exception();
+//		}
 		
 	}
 	

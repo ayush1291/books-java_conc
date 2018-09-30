@@ -3,6 +3,8 @@ package com.multithreading.javaConcurrencyInPrac.chap4.step6;
 
 //mutable but thread safe 
 //if separate geteers, there is a possiblity of getting x from 1 thread, and y set by another
+
+//If we use volatile, then also a problem can occur, same problem
 public class MutablePoint {
 	private int x, y;
 	

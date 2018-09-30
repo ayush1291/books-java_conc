@@ -1,0 +1,72 @@
+1. no direct way of handling hread / task cancellation
+2. Cancellation policy : how to request, when to request, what to do
+
+3. When thread.interrupt() is called, only flag value is set....its the responsibility of thread, to act upon it.
+Interrupted exception is thrown only when the thread is in blocking state and is interrupted
+
+4. Interruption is teh most sensible way to implement cancellation
+
+5. Interruption policy : how to respond to interruption
+
+6. generally, code that don't own the thread (say our task), should handle itself and preserve the interrupted status, 
+so that the owner (service / thread pool) is aware of this fact
+
+7. The task should NOT assume anything about the policy of the caller. on detecting interruption, the task should perform 
+neceesary activity quickly, preserve the status
+Either
+- handle and set status again
+- propage till caller
+
+8. Also, thread's interruption should be handled by the caller (through shutdown etc)...so that it can eventually hanlde 
+it post interruption
+Only the code that implments thread's interruption policy can swallow interruption.
+Task / library code should NOT (pg.143)
+
+9. when a thread pool detects its interruption, it checks if pool is being shut down....if such is the case, 
+it will perform clean up, else will create a new one
+
+10. if runtime exception is thrown by a runnable, it may go unnoticed (step 4)
+
+11. cancelling task using future (step 5)
+
+12. How to handle cacnellation the way shutdown does urslef(tep6)
+
+13. thread ownership is not transitive
+application owns service >> service owns thread
+>>>>>>> so application owns thread >> XXXXXXXXXXXX NO
+So ,it should not stop them directly....instead go through shutdoem mechanism / lifecycle methods
+
+14. Shutdownnow : abrupt termination, running tasks are interrupted; we cannot know what happened to tasks that were being 
+executed unless the task itself logs something
+shutdown : allows all submitted tasks to complete, but NO more submissions
+
+15. We can keep a list of tasks, that didn't complete and were interruoted during execution due to shutdown
+(List in step 7)
+ 
+16. Posion pills : Consider a particular msg as end of submission for producers...NO more submission post this msg
+Also, since FIFO, the consumer when gets this msg, it would have processed other messages, so it can terminate
+when it receives this signal
+For a single producer/consumer, its not an issue
+For multiple, you should consider n poison pills
+So, when this found, producer will be interrupted. The consumer will stop on;y post completing other tasks
+
+17. Runtime exceptions causes premature death of threads. Generally they are not handled and they propagate up the stack
+and mostly just log error in console. Sometines its fine, if we loose a thread from pool, but for GUI single threaded 
+applications, we have to handle such situations
+
+18. Ideally, tasks should be called in a try-catch block, so that such exceptions are caught or alteast the F/W knows that sth
+weird happened 
+
+19. To handle thread deaths due to uncaughtexceptions
+https://medium.com/@aozturk/how-to-handle-uncaught-exceptions-in-java-abf819347906
+- run() method of a thread is structured with try-catch block and if a task throws an unchecked exception, 
+it allows the thread to die. While handling the exception, the replacement of this worker thread with a 
+new thread can be triggered.
+- Uncaught Exception Handler
+- Thread Pool Executor Handler
+- afterExecute() method in ThreadPoolExecutor can be overridden. 
+The solution below handles both cases you use submit() or execute() methods of the execution service.
+-If a task submitted with submit() terminates with an exception, it is rethrown by Future.get() and wrapped in an ExecutionException.
+
+
+

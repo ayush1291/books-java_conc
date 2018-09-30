@@ -18,8 +18,10 @@ transitions may result into atomicity or encapsulation requirement
 7. Decorator pattern (in all synchronized* collections....it wraps in synchronized method, but calls underlying collection's method)
 
 8. Java Monitor pattern (Vector, Hashtable)
-here, we have a private lock, instead of using intrinsic lock. 
+here, we have a private lock, instead of using intrinsic lock.
+
 Advantages : easy to debug when liveness problems occurs as intrinsic lock can be held by anyone
+
 Also, since lock is private. client code will NOT acquire this (client can acquire intrinsic lock incorrectly and keep it awai)
 
 9. Delegating thread safety......use such collections or such things that they will take care of thread safety

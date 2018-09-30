@@ -1,5 +1,8 @@
 package com.multithreading.javaConcurrencyInPrac.chap4.step5;
 
+
+//here, when a condition is such that state casn be invalid, exception should be thrown....BUT here thats not the case,
+//so we miss the chance to capture incorrect state
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -16,7 +19,7 @@ public class MultipleDelegationFails {
 	//individually, these are atomic, but as a whole, there is a chance of failure
 	//so only delegation will fail.....use extra locking
 	
-	public synchronized void setUpper (int i) throws Exception{
+	public void setUpper (int i) throws Exception{
 		if (i > lower.get()) {
 			upper.set(i);
 		}else {
@@ -25,7 +28,7 @@ public class MultipleDelegationFails {
 		
 	}
 	
-	public synchronized void setLower (int i) throws Exception{
+	public void setLower (int i) throws Exception{
 		if (i < upper.get()) {
 			Thread.sleep(4000);
 			lower.set(i);
