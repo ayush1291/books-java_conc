@@ -1,0 +1,2 @@
+Deques and work stealing.. can be achieved with deque- ealier it was prod consumer only with blocking queue---
+- where prod and consumers are same. for eg web page crawler and indexer
