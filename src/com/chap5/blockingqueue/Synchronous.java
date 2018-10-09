@@ -30,6 +30,7 @@ public class Synchronous {
 			};
 		}.start();
 		
+		Thread.sleep(1000);
 		syn.put(2);
 		syn.put(3);
 	}
