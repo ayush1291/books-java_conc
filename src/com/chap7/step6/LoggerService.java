@@ -17,11 +17,12 @@ public class LoggerService {
 	public static void main(String[] args) throws InterruptedException {
 		thread.start(); 
 		for (int i =0; i<15; i++) {
+			
 			put(i+"");
 			//######
-//			if (i == 8) {
-//				thread.interrupt();
-//			}
+			if (i == 8) {
+				thread.interrupt();
+			}
 		}
 	 System.out.println("Main exits, JVM is running" + thread.getState().name());
 	}

@@ -1,5 +1,8 @@
 package com.chap8.step1;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class ThreadPoolExecutorMethods {
 	
 	//1. Executor : only execute available
@@ -12,4 +15,9 @@ public class ThreadPoolExecutorMethods {
 	//check ThreadPoolExecutor : corePoolSize, maxoolSize, keepAliveTime etc
 	//newFixedThreadPool : pool of fixed number of threads, if one dies and ExecutorService is not shutting down, new thread will be created
 	//newCachedThreadPool : can expand to max no. of threads, but creates only whne required
+	
+	public static void main(String[] args) {
+		ExecutorService service = Executors.newSingleThreadExecutor();
+		service.set
+	}
 }

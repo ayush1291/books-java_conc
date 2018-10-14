@@ -13,6 +13,8 @@ public class CancellingTaskPostExceptionNotRespondingToInterruptionSoln {
 
 	public static void main(String[] args) {
 		A a = new A();
+//		a.start();
+//		a.interrupt();
 		ExecutorService exe = Executors.newSingleThreadExecutor();
 		Future<?> future = exe.submit(a);
 		try {
@@ -38,6 +40,8 @@ public class CancellingTaskPostExceptionNotRespondingToInterruptionSoln {
 			}
 		}
 		
+		
+		//THis method does not get called becz, thread factory of executor is using its own threads and runnable of A
 		@Override
 		public void interrupt() {
 			

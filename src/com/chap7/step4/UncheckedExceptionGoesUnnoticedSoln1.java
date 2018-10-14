@@ -4,6 +4,8 @@ import java.util.Timer;
 
 
 //sol1 : rethrow the error / check if error was thrown post completion
+
+//If interruption is set, and afterwards sleep is called, then 
 public class UncheckedExceptionGoesUnnoticedSoln1 {
 
 	public static void main(String[] args) {
@@ -39,6 +41,11 @@ public class UncheckedExceptionGoesUnnoticedSoln1 {
 					if (i == 500){
 						System.out.println("Throw exception from thread");
 						t = new NullPointerException();
+						try{
+							
+						}catch(RuntimeException e){
+							
+						}
 						throw new RuntimeException();
 					}else{
 						Thread.sleep(1);

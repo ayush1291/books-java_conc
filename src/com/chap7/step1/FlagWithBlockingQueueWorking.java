@@ -22,12 +22,13 @@ public static void main(String[] args) throws InterruptedException {
 			pg.cancel();
 		}
 		
+		//Here, deadlock can also occur
 	}
 	
 	
 	static class PrimeGenerator implements Runnable{
 		
-		private BlockingQueue<Integer> primes = new ArrayBlockingQueue(1000000);
+		private BlockingQueue<Integer> primes = new ArrayBlockingQueue(4);
 		private volatile boolean cancelled;
 		
 		@Override

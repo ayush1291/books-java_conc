@@ -11,6 +11,7 @@ import java.util.concurrent.TimeoutException;
 
 //post timeout. when we cancel the task, its sleep is interrupted, so we get InterruptedException and finally the task is cancelled
 //since it was a blocking method...i.e. sleep, it responded to interruption
+//if no interruption 
 public class CancellingTaskPostException {
 
 	public static void main(String[] args) {
@@ -28,6 +29,7 @@ public class CancellingTaskPostException {
 		}finally{
 			System.out.println("cancelling task, sleep will be interrupted now");
 			future.cancel(true);
+			System.out.println(future.isCancelled());
 			System.out.println("cancelled : "+ future.isCancelled() + "*** done : " + future.isDone());
 		}
 	}
@@ -36,12 +38,9 @@ public class CancellingTaskPostException {
 		
 		public void run() {
 			System.out.println("A");
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				System.out.println("Interruption handled");
+			while(true){
+				System.out.println("Here");
 			}
-			
 		}
 
 	}

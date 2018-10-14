@@ -26,11 +26,8 @@ public class Interruption {
 				e.printStackTrace();
 			}
 			nonCancelableTask.interrupt();
-			Thread.sleep(10000);
 			
-			
-			//ayush
-			//why not flag set
+			//Race condition here - 
 			if (nonCancelableTask.isInterrupted()) {
 				System.out.println("AAAAA");
 				throw new RuntimeException();
