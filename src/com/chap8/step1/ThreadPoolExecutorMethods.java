@@ -18,6 +18,6 @@ public class ThreadPoolExecutorMethods {
 	
 	public static void main(String[] args) {
 		ExecutorService service = Executors.newSingleThreadExecutor();
-		service.set
+		
 	}
 }
